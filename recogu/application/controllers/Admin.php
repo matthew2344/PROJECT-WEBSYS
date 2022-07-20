@@ -272,12 +272,12 @@ class Admin extends CI_Controller
 
 
 		$data['title'] = "Admin Manage Student";
-		$this->load->view('includes/dashboard/header',$data);
-		$this->load->view('includes/admin/side_nav');
-		$this->load->view('includes/admin/nav');
+		$this->load->view('dashboard/header',$data);
+		$this->load->view('admin/side_nav');
+		$this->load->view('admin/nav');
 		$this->load->view('admin/pages/view_student');
-		$this->load->view('includes/dashboard/footer_nav');
-		$this->load->view('includes/dashboard/footer');
+		$this->load->view('dashboard/footer_nav');
+		$this->load->view('dashboard/footer');
 	}
 
 	public function edit_student($id)
@@ -288,12 +288,12 @@ class Admin extends CI_Controller
 
 
 		$data['title'] = "Admin Manage Student";
-		$this->load->view('includes/dashboard/header',$data);
-		$this->load->view('includes/admin/side_nav');
-		$this->load->view('includes/admin/nav');
+		$this->load->view('dashboard/header',$data);
+		$this->load->view('admin/side_nav');
+		$this->load->view('admin/nav');
 		$this->load->view('admin/pages/edit_student');
-		$this->load->view('includes/dashboard/footer_nav');
-		$this->load->view('includes/dashboard/footer');
+		$this->load->view('dashboard/footer_nav');
+		$this->load->view('dashboard/footer');
 	}
 
 	public function update_student($id)
@@ -473,12 +473,12 @@ class Admin extends CI_Controller
 
 
 		$data['title'] = "Admin Manage teacher";
-		$this->load->view('includes/dashboard/header',$data);
-		$this->load->view('includes/admin/side_nav');
-		$this->load->view('includes/admin/nav');
+		$this->load->view('dashboard/header',$data);
+		$this->load->view('admin/side_nav');
+		$this->load->view('admin/nav');
 		$this->load->view('admin/pages/view_teacher');
-		$this->load->view('includes/dashboard/footer_nav');
-		$this->load->view('includes/dashboard/footer');
+		$this->load->view('dashboard/footer_nav');
+		$this->load->view('dashboard/footer');
 	}
 	
 	public function edit_teacher($id)
@@ -488,12 +488,12 @@ class Admin extends CI_Controller
 
 
 		$data['title'] = "Admin Manage Teacher";
-		$this->load->view('includes/dashboard/header',$data);
-		$this->load->view('includes/admin/side_nav');
-		$this->load->view('includes/admin/nav');
+		$this->load->view('dashboard/header',$data);
+		$this->load->view('admin/side_nav');
+		$this->load->view('admin/nav');
 		$this->load->view('admin/pages/edit_teacher');
-		$this->load->view('includes/dashboard/footer_nav');
-		$this->load->view('includes/dashboard/footer');
+		$this->load->view('dashboard/footer_nav');
+		$this->load->view('dashboard/footer');
 	}
 
 	public function update_teacher($id)
