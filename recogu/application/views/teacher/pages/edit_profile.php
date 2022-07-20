@@ -37,10 +37,6 @@
                         <label for="lastname">Last name</label>
                         <input type="text" name="lname" class="form-control" value="<?=$_SESSION['lname']?>">
                      </div>
-                     <div class="col-xl-3 col-lg-4 col-md-5 col-sm-3">
-                        <label for="Email">Email</label>
-                        <input type="email" name="email" class="form-control" value="<?=$_SESSION['email']?>">
-                     </div>
                   </div>
                   <button type="submit" class="btn btn-primary">Save Changes</button>
                   <?= form_close(); ?>
@@ -50,7 +46,7 @@
          <div class="card bg-light py-3 px-3">
             <div class="row">
                <div class="card-title d-flex flex-wrap">
-                  Change Password <span class="text-danger mx-2">* Change Your First Password For Security Purposes</span>
+                  Change Password
                   <br>
                </div>
                <div class="card-body">

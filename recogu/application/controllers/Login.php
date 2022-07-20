@@ -25,7 +25,7 @@ class Login extends CI_Controller
 
     public function auth()
     {
-        $this->form_validation->set_rules('enum', 'User number', 'required');
+        $this->form_validation->set_rules('email', 'Email', 'required');
 		$this->form_validation->set_rules('password', 'Password', 'required');
 
 		if(!$this->form_validation->run())
@@ -35,13 +35,13 @@ class Login extends CI_Controller
         else
         {
             $data = array(
-				'id' => $this->input->post('enum'),
+				'email' => $this->input->post('email'),
 				'password' => sha1($this->input->post('password')),
 			);
 
 
             $this->load->model('User');
-            if($results = $this->User->validate_user($data))
+            if($results = $this->User->login($data))
             {
                 // VALID LOGIN
                 foreach($results as $result)
@@ -69,65 +69,6 @@ class Login extends CI_Controller
         }
     }
 
-    public function new_login()
-    {
-        $data['title'] = "New User Login";
-		$this->load->view('includes/header',$data);
-		$this->load->view('includes/nav');
-		$this->load->view('first_login');
-		$this->load->view('includes/footer');
-    }
-
-    public function validate_new()
-    {
-        $this->load->model('User');
-        $this->form_validation->set_rules('email','Email','required');
-        $this->form_validation->set_rules('oldpassword','Old Password','required');
-        $this->form_validation->set_rules('password','New Password','required');
-        $this->form_validation->set_rules('cpassword','Confirm Password','required|matches[password]');
-
-        if(!$this->form_validation->run())
-        {
-            $this->new_login();
-        }
-        else
-        {
-            $data = array(
-                'email' => $this->input->post('email'),
-                'activation_code' => random_string('alnum', 16),
-                'password' => sha1($this->input->post('password')),
-            );
-            $id = $this->session->userdata['uid'];
-            $results = $this->User->get_where($this->session->userdata['uid']);
-            if($results)
-            {
-                foreach($results as $i)
-                {
-                    $oldpass = $i->password;
-                }
-            
-            }
-
-
-            if($oldpass != sha1($this->input->post('oldpassword')))
-            {
-                $this->new_login();
-                $this->session->set_flashdata('incorrect', 'Old password is incorrect');
-            }
-            else
-            {
-                $this->User->update($data,$id);
-                $flash_data = array(
-                    'temp_id' => $id,
-                    'temp_email' => $data['email'],
-                    'temp_activation_code' => $data['activation_code'],
-                );
-                $this->session->set_flashdata($flash_data);
-                redirect('Verification');
-            }        
-        }
-    }
-
     public function redirect_user($usertype,$status)
     {
         if($usertype == 'Admin')
@@ -145,38 +86,20 @@ class Login extends CI_Controller
         }
         elseif($usertype == 'Teacher')
         {
-            if($status == 0)
-            {
-                redirect('Login/new_login');
-            }
-            else
-            {              
-                $this->session->set_userdata('teacher_logged_in', TRUE);
-                redirect('Teacher');
-            }
+            
+            $this->session->set_userdata('teacher_logged_in', TRUE);
+            redirect('Teacher');
         }
         elseif($usertype == 'Staff')
         {
-            if($status == 0)
-            {
-                redirect('Login/new_login');
-            }
-            else
-            {
-                redirect('Staff');
-            }
+            redirect('Staff');
         }
         elseif($usertype == 'Student')
         {
-            if($status == 0)
-            {
-                redirect('Login/new_login');
-            }
-            else
-            {
-                $this->session->set_userdata('student_logged_in', TRUE);
-                redirect('Student');
-            }
+
+            $this->session->set_userdata('student_logged_in', TRUE);
+            redirect('Student');
+
         }
         else
         {

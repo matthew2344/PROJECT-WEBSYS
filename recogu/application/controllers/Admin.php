@@ -69,7 +69,6 @@ class Admin extends CI_Controller
         $this->form_validation->set_rules('fname', 'First name', 'required');
         $this->form_validation->set_rules('mname', 'Middle name', 'required');
         $this->form_validation->set_rules('lname', 'Last name', 'required');
-        $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
         if(!$this->form_validation->run())
         {
             $this->edit_profile();
@@ -96,6 +95,23 @@ class Admin extends CI_Controller
             redirect('Admin/profile');
         }
     }
+
+	public function update_email($uid)
+	{
+		$this->load->model('User');
+		$this->form_validation->set_rules('email', 'Email', 'required|valid_email|is_unique[user.email]');
+		if(!$this->form_validation->run())
+        {
+            $this->edit_profile();
+        }
+		else
+		{
+			$data = array('email' => $this->input->post('email'));
+			$this->session->set_userdata(array('email' => $this->input->post('email')));
+			$this->User->update($data,$uid);
+			redirect('Admin/profile');
+		}
+	}
 
 	public function update_password($uid)
     {
@@ -617,15 +633,40 @@ class Admin extends CI_Controller
 		$config["uri_segment"] = 3;
 
 
-
-
-
 		$this->pagination->initialize($config);
         $data['pagination'] = $this->pagination->create_links();
         $page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
 
         $data['staffs'] = $this->Staff->select($config["per_page"], $page);
 
+
+		$data['title'] = "Admin Manage Staff";
+		$this->load->view('dashboard/header',$data);
+		$this->load->view('admin/side_nav');
+		$this->load->view('admin/nav');
+		$this->load->view('admin/pages/manage_staff');
+		$this->load->view('dashboard/footer_nav');
+		$this->load->view('dashboard/footer');
+	}
+
+	public function search_staff()
+	{
+		$this->check_session();
+		$search = ($this->input->post("search_staff"))? $this->input->post("search_staff"): '';
+
+        $this->load->model('Staff');
+        $config = array();
+		$config = $this->bootstrap_pagination();
+		$config["base_url"] =  base_url() . "Admin/search_staff";
+		$config["total_rows"] = $this->Staff->count($search);
+		$config["per_page"] = 4;
+		$config["uri_segment"] = 3;
+
+        $this->pagination->initialize($config);
+        $page = ($this->uri->segment(3))? $this->uri->segment(3) : 0;
+		$data["pagination"] = $this->pagination->create_links();
+		$data['staffs'] = $this->Staff->select($config["per_page"], $page, $search);
+        $data['search'] = $search;
 
 		$data['title'] = "Admin Manage Staff";
 		$this->load->view('dashboard/header',$data);

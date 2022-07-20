@@ -4,7 +4,7 @@
     <div class="px-4 py-5 px-md-5 text-center text-lg-start">
         <div class="container">
             <div class="row gx-lg-5 align-items-center">
-                <div class="col-lg-6 col-xl-6 mb-5 mb-lg-0">
+                <div class="col-lg-6 col-xl-6 mb-2 mb-lg-0">
                     <h1 class="my-5 display-3 fw-bold ls-tight">
                         School Attendance <br/>
                         <span class="text-primary">System</span>
@@ -35,14 +35,15 @@
                             <?= form_open('login_authentication'); ?>
                             <h5 class="text-primary mb-2">Sign in</h1>
                             <div class="form-outline mb-4">
-                                <input type="text" name="enum" class="form-control">
-                                <label for="" class="form-label">User account</label>
+                                <input type="email" name="email" class="form-control" >
+                                <label for="" class="form-label">Email account</label>
                             </div>
                             <div class="form-outline mb-4">
                                 <input type="password" name="password" class="form-control">
-                                <label for="" class="form-label">Password</label>
+                                <label for="" class="form-label">Password</label> 
+                                <br>
+                                <span class="text-muted" data-tip="Hint: password is the same as your school id">Hint</span>
                             </div>
-
                             <button class="btn btn-primary" type="submit">Sign in</button>
                             <a href="<?=base_url('Register')?>" class="btn btn-success">Register</a>
                             <?= form_close(); ?>

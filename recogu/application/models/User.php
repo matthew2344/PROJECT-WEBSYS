@@ -41,6 +41,12 @@ class User extends CI_Model
         return $result->result();
     }
 
+    public function login($data)
+    {
+        $result = $this->db->get_where('user', array('email' => $data['email'], 'password' => $data['password']));
+        return $result->result();
+    }
+
     public function update($data,$id)
     {
         $this->db->update('user', $data, array('id' => $id));

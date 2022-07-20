@@ -48,7 +48,7 @@ class Staff extends CI_Model
         // Create Password
         $data['password'] = sha1($this->db->insert_id());
         $last_id = $this->db->insert_id();
-
+        $data['email'] = $last_id.'@email.com';
         $this->db->update('user', $data, array('id' => $last_id));
 
         return $last_id;

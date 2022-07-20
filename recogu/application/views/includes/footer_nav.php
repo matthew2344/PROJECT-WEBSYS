@@ -9,7 +9,7 @@
   </style>
   
   <!-- ======= Footer ======= -->
-  <footer id="footer" class="footer">
+  <footer id="footer" class="footer mt-5">
 
     <div class="footer-top">
       <div class="container">

@@ -14,16 +14,12 @@
                 </div>
                 <?php endif; ?>
                 <div class="card-title">
-                    <h4 class="mb-3">Email Verification</h1>
-                    <p class="text-danger">*This is for security purposes only</p>
+                    <h4 class="mb-3">New Login</h1>
+                    <p class="text-danger">*Change password</p>
                     <hr>
                 </div>
                 <div class="card-body">
                     <?= form_open('Login/validate_new/');?>
-                    <p>Please enter your email <span class="text-danger">*</span></p>
-                    <label for="Email">Email</label>
-                    <input type="email" name="email" id="" class="form-control mb-3">
-                    <hr class="mb-4">
                     <p>Please enter your new password <span class="text-danger">*</span></p>
                     <label for="Old password">Old password</label>
                     <input type="password" name="oldpassword" id="" class="form-control mb-3">

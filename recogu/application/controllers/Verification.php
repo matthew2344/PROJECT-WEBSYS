@@ -114,7 +114,7 @@ class Verification extends CI_Controller
 					<table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;">
 						<tr>
 							<td bgcolor="#ffffff" align="left" style="padding: 20px 30px 40px 30px; color: #666666; font-family: \'Lato\', Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 400; line-height: 25px;">
-								<p style="margin: 0;">We\'re excited to have you get started. First, you need to confirm your account. Just press the button below.</p>
+								<p style="margin: 0;">We\'re excited to have you get started your User ID is <span class = "text-primary">'.$id.'</span>. First, you need to confirm your account. Just press the button below.</p>
 							</td>
 						</tr>
 						<tr>

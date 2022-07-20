@@ -42,9 +42,25 @@
                         <label for="lastname">Last name</label>
                         <input type="text" name="lname" class="form-control" value="<?=$_SESSION['lname']?>">
                      </div>
+                  </div>
+                  <button type="submit" class="btn btn-primary">Save Changes</button>
+                  <?= form_close(); ?>
+               </div>
+            </div>
+         </div>
+         <div class="card bg-light py-3 px-3">
+            <div class="row">
+               <div class="card-title d-flex flex-wrap justify-content-between">
+                  Change Email
+                  <br>
+               </div>
+               <div class="card-body">
+                  <?= form_open('Admin/update_email/'.$_SESSION['uid'], array('class' => 'form')) ?>
+                  <div class="row mb-5">
                      <div class="col-xl-3 col-lg-4 col-md-5 col-sm-3">
+                        <label for="Old Email" class="mb-4">Current Email: <?=$_SESSION['email']?></label>
                         <label for="Email">Email</label>
-                        <input type="email" name="email" class="form-control" value="<?=$_SESSION['email']?>">
+                        <input type="email" name="email" class="form-control">
                      </div>
                   </div>
                   <button type="submit" class="btn btn-primary">Save Changes</button>
