@@ -13,6 +13,7 @@ class Logout extends CI_Controller
 
     public function index()
     {
+		// DESTROYS USERDATA SESSIONS AND REDIRECTED TO LOGIN PAGE
         $this->session->sess_destroy();
         redirect('Login');
     }

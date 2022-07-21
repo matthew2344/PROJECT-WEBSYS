@@ -20,11 +20,11 @@
                <div class="card-title d-flex flex-wrap justify-content-between">
                   User Profile
                   <br>
-                  <a href="<?= base_url('Admin/staff')?>">Go back</a>
+                  <a href="<?= base_url('Admin_staff')?>">Go back</a>
                </div>
                <div class="card-body">
                 <?php foreach($staff as $i):?>
-                  <?= form_open('Admin/update_staff/'.$i->sid, array('class' => 'form')) ?>
+                  <?= form_open('Update_staff/'.$i->sid, array('class' => 'form')) ?>
                   <div class="row mb-5">
                      <div class="col-xl-3 col-lg-4 col-md-5 col-sm-3">
                         <label for="Firstname">First Name</label>

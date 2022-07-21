@@ -1,6 +1,16 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-
+// 
+// CONTORLLER OF ERROR404
+// ---[USE CASE SCENARIO]---
+// DISPLAY WHEN SPECIFIC LINK OR PAGE REQUEST IS NON-EXISTENT
+// 
+// ---[FUNCTIONS]---
+// construct() -> LINE 16
+// index() -> LINE 23
+// link_configure() -> LINE 35
+// ------[END]------
+// 
 class Error404 extends CI_Controller
 {
     public function __construct()

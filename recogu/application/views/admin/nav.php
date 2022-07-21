@@ -21,13 +21,13 @@
                   </a>
                   <ul class="dropdown-menu ">
                      <li>
-                        <a href="<?=base_url('Admin/profile')?>" class="list-group-item">Profile</a>
+                        <a href="<?=base_url('Admin_profile')?>" class="list-group-item">Profile</a>
                      </li>
                      <li>
-                        <a href="<?=base_url('Admin/edit_profile')?>" class="list-group-item">Settings</a>
+                        <a href="<?=base_url('Admin_edit')?>" class="list-group-item">Settings</a>
                      </li>
                      <li>
-                        <a href="<?=base_url('Admin')?>" class="list-group-item">Dashboard</a>
+                        <a href="<?=base_url('Admin_dashboard')?>" class="list-group-item">Dashboard</a>
                      </li>
                      <li>
                         <a href="<?=base_url('Logout')?>" class="list-group-item">Logout</a>

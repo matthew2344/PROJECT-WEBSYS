@@ -21,7 +21,7 @@
                   <h5 class="fw-bold text-primary">Create Teachers</h5>
                </div>
                <div class="card-body">
-                  <?= form_open_multipart('Admin/create_teacher')?>
+                  <?= form_open_multipart('Create_teacher')?>
                   <div class="row">
                      <div class="col-12 col-xl-8 col-md-12 col-sm-12">
                         <div class="d-flex flex-wrap align-content-center">
@@ -109,7 +109,7 @@
             <div class="card-body">
                <div class="row mb-4">
                   <div class="col-lg-4 col-sm-6 d-flex">
-                     <?= form_open('Admin/search_teacher', array('class' => 'd-flex'))?>
+                     <?= form_open('Search_teacher', array('class' => 'd-flex'))?>
                      <input class="form-control me-2" type="search" name="search_teacher" placeholder="Search" aria-label="Search" value="<?php if(isset($search)){ echo $search;}else{}?>">
                      <button class="btn btn-primary" type="submit" >Search</button>
                      <?= form_close();?>
@@ -121,20 +121,21 @@
                      <div class="row">
                         <div class="col-lg-3 col-sm-6">
                            <div class="img" style="width: 100%;">
-                              <img class="rounded" src="<?=base_url()?>uploads/<?=$teacher->avatar?>" alt="" height="200" style="width:inherit;">
+                              <img class="rounded" src="<?=base_url($this->config->item('Upload_img'))?><?=$teacher->avatar?>" alt="" height="200" style="width:inherit;">
                            </div>
                         </div>
                         <div class="col-lg-4 col-sm-6">
                            <div class="text-center fw-bold text-primary">USER INFORMATION</div>
                            <ul class="text-secondary">
+                              <li>SCHOOL ID: <?= $teacher->tid ?></li>
                               <li>First name: <?=$teacher->fname?></li>
                               <li>Middle name: <?=$teacher->mname?></li>
                               <li>Last name: <?=$teacher->lname?></li>
                            </ul>
                            <div class="p-3">
-                              <a href="<?=base_url('Admin/view_teacher/'.$teacher->tid)?>" class="btn btn-primary">View</a>
-                              <a href="<?=base_url('Admin/edit_teacher/'.$teacher->tid)?>" class="btn btn-success">Edit</a>
-                              <a href="<?=base_url('Admin/delete_teacher/'.$teacher->tid)?>" class="btn btn-danger">Delete</a>
+                              <a href="<?=base_url('View_teacher/'.$teacher->tid)?>" class="btn btn-primary">View</a>
+                              <a href="<?=base_url('Edit_teacher/'.$teacher->tid)?>" class="btn btn-success">Edit</a>
+                              <a href="<?=base_url('Delete_teacher/'.$teacher->tid)?>" class="btn btn-danger">Delete</a>
                            </div>
                         </div>
                      </div>

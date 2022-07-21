@@ -1,6 +1,11 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-
+// 
+// ---[TEACHER CONTROLLER]---
+// --FUNCTIONS--[TOTAL OF 07]
+// TEACHER DASHBOARD AND PROFILE -> LINE 18-155
+// SESSION CHECKER [TEACHER] -> LINE 157-166
+// [OTHER FUNCTIONS ARE WORK IN PROGRESS]
 class Teacher extends CI_Controller
 {
     public function __construct()
@@ -10,10 +15,11 @@ class Teacher extends CI_Controller
         $this->load->library(array('session','upload','form_validation'));
     }
 
+    // ---[TEACHER DASHBOARD AND PROFILE]---
+	// 			---[START]---
     public function index()
     {
         $this->check_session();
-
         $data['title'] = 'Teacher Dashboard';
         $this->load->view('dashboard/header',$data);
 		$this->load->view('teacher/side_nav');
@@ -54,7 +60,6 @@ class Teacher extends CI_Controller
         $this->form_validation->set_rules('fname', 'First name', 'required');
         $this->form_validation->set_rules('mname', 'Middle name', 'required');
         $this->form_validation->set_rules('lname', 'Last name', 'required');
-        $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
         if(!$this->form_validation->run())
         {
             $this->edit_profile();
@@ -65,7 +70,6 @@ class Teacher extends CI_Controller
                 'fname' => $this->input->post('fname'),
                 'mname' => $this->input->post('mname'),
                 'lname' => $this->input->post('lname'),
-                'email' => $this->input->post('email'),
             );
 
             $this->session->set_userdata(
@@ -73,7 +77,6 @@ class Teacher extends CI_Controller
                     'fname' => $this->input->post('fname'),
                     'mname' => $this->input->post('mname'),
                     'lname' => $this->input->post('lname'),
-                    'email' => $this->input->post('email'),
                 )
             );
 
@@ -122,9 +125,9 @@ class Teacher extends CI_Controller
     {
         $this->check_session();
         $config = array(
-            'upload_path' =>  './uploads/',
-            'allowed_types' => 'gif|jpg|png',
-            'max_size' => 2048
+            'upload_path' =>  $this->config->item('Upload_path'),
+            'allowed_types' => $this->config->item('Img_types'),
+            'max_size' => $this->config->item('Max_img_size'),
         );
 
         $this->load->library('upload');
@@ -148,16 +151,17 @@ class Teacher extends CI_Controller
             redirect('Teacher/profile');
         }
     }
-
-    
+    // ---[TEACHER DASHBOARD AND PROFILE]---
+	// 			---[END]---
 
     public function check_session()
     {
+        // ---[FUNCTION DESCRIPTION & USE CASE SCENARIO]---
+		// SESSION CHECKER FOR TEACHER LOGINS; LIMITS ACCESS TO OTHER USERTYPES
+		// REDIRECTS TO LOGIN PAGE 
         if($this->session->userdata['teacher_logged_in'] == FALSE)
 		{
 			redirect('Login');
 		}
     }
-
-
 }

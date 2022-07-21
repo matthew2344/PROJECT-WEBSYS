@@ -1,7 +1,11 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-
-
+// 
+// ---[STUDENT CONTROLLER]---
+// --FUNCTIONS--[TOTAL OF 07]
+// STUDENT DASHBOARD AND PROFILE -> LINE 18-155
+// SESSION CHECKER [STUDENT] -> LINE 157-166
+// [OTHER FUNCTIONS ARE WORK IN PROGRESS]
 class Student extends CI_Controller
 {
     public function __construct()
@@ -11,6 +15,8 @@ class Student extends CI_Controller
 		$this->load->library(array('session','form_validation'));
 	}
 
+	// ---[STUDENT DASHBOARD AND PROFILE]---
+	// 			---[START]---
     public function index()
 	{
 		$this->check_session();
@@ -22,8 +28,6 @@ class Student extends CI_Controller
 		$this->load->view('dashboard/footer_nav');
 		$this->load->view('dashboard/footer');
 	}
-
-
 
 	public function profile()
 	{
@@ -56,7 +60,6 @@ class Student extends CI_Controller
         $this->form_validation->set_rules('fname', 'First name', 'required');
         $this->form_validation->set_rules('mname', 'Middle name', 'required');
         $this->form_validation->set_rules('lname', 'Last name', 'required');
-        $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
         if(!$this->form_validation->run())
         {
             $this->edit_profile();
@@ -67,7 +70,6 @@ class Student extends CI_Controller
                 'fname' => $this->input->post('fname'),
                 'mname' => $this->input->post('mname'),
                 'lname' => $this->input->post('lname'),
-                'email' => $this->input->post('email'),
             );
 
             $this->session->set_userdata(
@@ -75,7 +77,6 @@ class Student extends CI_Controller
                     'fname' => $this->input->post('fname'),
                     'mname' => $this->input->post('mname'),
                     'lname' => $this->input->post('lname'),
-                    'email' => $this->input->post('email'),
                 )
             );
 
@@ -124,9 +125,9 @@ class Student extends CI_Controller
     {
         $this->check_session();
         $config = array(
-            'upload_path' =>  './uploads/',
-            'allowed_types' => 'gif|jpg|png',
-            'max_size' => 2048
+            'upload_path' =>  $this->config->item('Upload_path'),
+            'allowed_types' => $this->config->item('Img_types'),
+            'max_size' => $this->config->item('Max_img_size'),
         );
 
         $this->load->library('upload');
@@ -150,18 +151,17 @@ class Student extends CI_Controller
             redirect('Student/profile');
         }
     }
+    // ---[STUDENT DASHBOARD AND PROFILE]---
+	// 			---[END]---
 	
-
 	public function check_session()
 	{
+        // ---[FUNCTION DESCRIPTION & USE CASE SCENARIO]---
+		// SESSION CHECKER FOR STUDENT LOGINS; LIMITS ACCESS TO OTHER USERTYPES
+		// REDIRECTS TO LOGIN PAGE 
 		if($this->session->userdata['student_logged_in'] == FALSE)
 		{
             redirect('Login');
 		}
 	}
-
-
-	
-
-
 }

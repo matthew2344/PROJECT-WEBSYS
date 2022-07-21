@@ -21,10 +21,10 @@
                   </a>
                   <ul class="dropdown-menu ">
                      <li>
-                        <a href="<?=base_url('Student/profile')?>" class="list-group-item">Profile</a>
+                        <a href="<?=base_url('Student_profile')?>" class="list-group-item">Profile</a>
                      </li>
                      <li>
-                        <a href="<?=base_url('Student/edit_profile')?>" class="list-group-item">Settings</a>
+                        <a href="<?=base_url('Student_edit')?>" class="list-group-item">Settings</a>
                      </li>
                      <li>
                         <a href="<?=base_url('Student')?>" class="list-group-item">Dashboard</a>

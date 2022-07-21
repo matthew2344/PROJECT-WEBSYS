@@ -3,7 +3,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Register extends CI_Controller
 {
-
 	public function __construct()
 	{
 		parent::__construct();
@@ -19,7 +18,6 @@ class Register extends CI_Controller
 		$this->load->view('includes/header',$data);
 		$this->load->view('includes/nav');
 		$this->load->view('register');
-		// $this->load->view('includes/footer_nav');
 		$this->load->view('includes/footer');
 	}
 
@@ -62,5 +60,4 @@ class Register extends CI_Controller
 			redirect('Verification');
         }
     }
-
 }

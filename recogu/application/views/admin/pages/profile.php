@@ -15,16 +15,16 @@
                <div class="card-title d-flex flex-wrap justify-content-between">
                   Admin Profile
                   <br>
-                  <a href="<?= base_url('admin_edit_profile')?>">Edit Profile</a>
+                  <a href="<?= base_url('Admin_edit')?>">Edit Profile</a>
                </div>
                <div class="card-body">
                   <div class="row">
                      <div class="col-xl-3 col-lg-4 col-md-12">
                         <button class="btn" style="width: 100%;" data-bs-toggle="modal" data-bs-target="#exampleModal">
                         <?php if(isset($_SESSION['avatar'])):?>
-                        <img src="<?=base_url()?>uploads/<?=$_SESSION['avatar']?>" alt="" height="200" style="width: inherit; object-fit: contain; display: block;">
+                        <img src="<?=base_url($this->config->item('Upload_img'))?><?=$_SESSION['avatar']?>" alt="" height="200" style="width: inherit; object-fit: contain; display: block;">
                         <?php else:?>     
-                        <img src="<?=base_url()?>uploads/asdasdas.jpg" alt="" height="200" style="width: inherit; object-fit: contain; display: block;">
+                        <img src="<?=base_url($this->config->item('Upload_img'))?>profile_pic.jpg" alt="" height="200" style="width: inherit; object-fit: contain; display: block;">
                         <?php endif;?>
                         </button>
                      </div>
@@ -50,7 +50,7 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
          </div>
          <div class="modal-body">
-            <?= form_open_multipart('admin_update_avatar/'.$_SESSION['uid']) ?>
+            <?= form_open_multipart('Admin_avatar/'.$_SESSION['uid']) ?>
             <div class="text-center">
                <h1>
                   <i class="fa-solid fa-upload"></i>

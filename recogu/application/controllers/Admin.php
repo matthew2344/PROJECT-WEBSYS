@@ -1,7 +1,14 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-
-
+// ---[ADMIN CONTROLLER]---
+// --FUNCTIONS--[TOTAL OF 32]
+// ADMIN DASHBOARD AND PROFILE -> LINE 21-219
+// STUDENT MANAGEMENT FUNCTIONS -> LINE 222-395
+// TEACHER MANAGEMENT FUNCTIONS -> LINE 398-565
+// STAFF MANAGEMENT FUNCTIONS -> LINE 568-735
+// BOOTSTRAP CONFIGURATION/STYLE FOR PAGINATION -> LINE 737-764
+// SESSION CHECKER [ADMIN] -> LINE 767-776
+// [OTHER FUNCTIONS ARE WORK IN PROGRESS]
 class Admin extends CI_Controller
 {
     public function __construct()
@@ -11,6 +18,8 @@ class Admin extends CI_Controller
 		$this->load->library(array ('form_validation', 'upload', 'session', 'pagination'));
 	}
 
+	// ---[ADMIN DASHBOARD AND PROFILE]---
+	// 			---[START]---
     public function index()
     {
 		$this->check_session();
@@ -21,14 +30,10 @@ class Admin extends CI_Controller
 		$config["total_rows"] = $this->User->count();
 		$config["per_page"] = 7;
 		$config["uri_segment"] = 3;
-
-
 		$this->pagination->initialize($config);
         $data['pagination'] = $this->pagination->create_links();
         $page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
-
         $data['admin'] = $this->User->select($config["per_page"], $page);
-
 		$data['title'] = "Admin Dashboard";
 		$this->load->view('dashboard/header',$data);
 		$this->load->view('admin/side_nav');
@@ -79,7 +84,6 @@ class Admin extends CI_Controller
                 'fname' => $this->input->post('fname'),
                 'mname' => $this->input->post('mname'),
                 'lname' => $this->input->post('lname'),
-                'email' => $this->input->post('email'),
             );
 
             $this->session->set_userdata(
@@ -87,7 +91,6 @@ class Admin extends CI_Controller
                     'fname' => $this->input->post('fname'),
                     'mname' => $this->input->post('mname'),
                     'lname' => $this->input->post('lname'),
-                    'email' => $this->input->post('email'),
                 )
             );
 
@@ -126,8 +129,7 @@ class Admin extends CI_Controller
         }
         else
         {
-			$data['id'] = $uid;
-            $results = $this->User->get_where($data);
+            $results = $this->User->get_where($uid);
             foreach($results as $result)
             {
                 $oldpass = $result->password;
@@ -153,9 +155,9 @@ class Admin extends CI_Controller
     {
         $this->check_session();
         $config = array(
-            'upload_path' =>  './uploads/',
-            'allowed_types' => 'gif|jpg|png',
-            'max_size' => 2048
+            'upload_path' =>  $this->config->item('Upload_path'),
+            'allowed_types' => $this->config->item('Img_types'),
+            'max_size' => $this->config->item('Max_img_size'),
         );
 
         $this->load->library('upload');
@@ -214,10 +216,11 @@ class Admin extends CI_Controller
 		}
 
 	}
+	// ---[ADMIN DASHBOARD AND PROFILE]---
+	// 			---[END]---
 
-
-
-	// STUDENT MANAGEMENT FUNCTIONS -START-
+	// ---[STUDENT MANAGEMENT FUNCTION]---
+	// 			---[START]---
 	public function student()
 	{
 		$this->check_session();
@@ -228,18 +231,10 @@ class Admin extends CI_Controller
 		$config["total_rows"] = $this->Student->count();
 		$config["per_page"] = 4;
 		$config["uri_segment"] = 3;
-
-
 		$this->pagination->initialize($config);
         $data['pagination'] = $this->pagination->create_links();
         $page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
-
         $data['students'] = $this->Student->select($config["per_page"], $page);
-
-
-
-
-
 		$data['title'] = "Admin Manage Student";
 		$this->load->view('dashboard/header',$data);
 		$this->load->view('admin/side_nav');
@@ -251,10 +246,8 @@ class Admin extends CI_Controller
 
 	public function search_student()
 	{
-		
 		$this->check_session();
 		$search = ($this->input->post("search_student"))? $this->input->post("search_student"): '';
-
         $this->load->model('Student');
         $config = array();
 		$config = $this->bootstrap_pagination();
@@ -262,15 +255,11 @@ class Admin extends CI_Controller
 		$config["total_rows"] = $this->Student->count($search);
 		$config["per_page"] = 4;
 		$config["uri_segment"] = 3;
-
-
-
         $this->pagination->initialize($config);
         $page = ($this->uri->segment(3))? $this->uri->segment(3) : 0;
 		$data["pagination"] = $this->pagination->create_links();
 		$data['students'] = $this->Student->select($config["per_page"], $page, $search);
         $data['search'] = $search;
-
 		$data['title'] = "Admin Manage Student";
 		$this->load->view('dashboard/header',$data);
 		$this->load->view('admin/side_nav');
@@ -285,8 +274,6 @@ class Admin extends CI_Controller
 		$this->check_session();
 		$this->load->model('Student');
 		$data['student'] = $this->Student->get_student($id);
-
-
 		$data['title'] = "Admin Manage Student";
 		$this->load->view('dashboard/header',$data);
 		$this->load->view('admin/side_nav');
@@ -301,8 +288,6 @@ class Admin extends CI_Controller
 		$this->check_session();
 		$this->load->model('Student');
 		$data['student'] = $this->Student->get_student($id);
-
-
 		$data['title'] = "Admin Manage Student";
 		$this->load->view('dashboard/header',$data);
 		$this->load->view('admin/side_nav');
@@ -316,11 +301,9 @@ class Admin extends CI_Controller
 	{
 		$this->check_session();
 		$this->load->model('Student');
-
 		$this->form_validation->set_rules('fname','First name', 'required');
 		$this->form_validation->set_rules('mname', 'Middle name', 'required');
 		$this->form_validation->set_rules('lname', 'Last name', 'required');
-
 		if(!$this->form_validation->run())
 		{
 			$this->edit_student($id);
@@ -347,8 +330,6 @@ class Admin extends CI_Controller
 		$this->form_validation->set_rules('lname', 'Last name', 'required');
 		$this->form_validation->set_rules('yearlvl', 'Year level', 'required');
 		$this->form_validation->set_rules('section', 'Section', 'required');
-
-
 		if(!$this->form_validation->run())
 		{
 			$this->student();
@@ -363,20 +344,14 @@ class Admin extends CI_Controller
 				'type' => 'Student',
 				'datecreated' => date('Y-m-d'),
 			);
-
-
-
 			// FILE UPLOAD --
 			$config = array(
-				'upload_path' =>  './uploads/',
-				'allowed_types' => 'gif|jpg|png',
-				'max_size' => 2048
+				'upload_path' =>  $this->config->item('Upload_path'),
+				'allowed_types' => $this->config->item('Img_types'),
+				'max_size' => $this->config->item('Max_img_size'),
 			);
-
-
 			$this->load->library('upload');
 			$this->upload->initialize($config);
-
 			if(!$this->upload->do_upload('avatar'))
 			{
 				$this->session->set_flashdata('error', $this->upload->display_errors());
@@ -386,25 +361,17 @@ class Admin extends CI_Controller
 			{
 				// UPLOAD SUCCESS 
 				$upload_data = $this->upload->data();
-
-
-
 				// GET UPLOAD FILE NAME
-				$user_data['avatar'] = $upload_data['file_name'];
-
-				
+				$user_data['avatar'] = $upload_data['file_name'];	
 				// STORE PIC TO DATA DB
 				$sid = $this->Student->insert($user_data);
-
 				// GET
 				$student_data = array(
 					'sid' => $sid,
 					'yearlvl' => $this->input->post('yearlvl'),
 					'section' => $this->input->post('section'),
-				);
-				
+				);			
 				$this->Student->insert_student($student_data);
-
 				redirect('Admin/student');
 			}
 		}
@@ -425,10 +392,11 @@ class Admin extends CI_Controller
 		$this->User->delete($id);
 		redirect('Admin/student');
 	}
+	// ---[STUDENT MANAGEMENT FUNCTION]---
+	// 			---[END]---
 
-	// STUDENT MANAGEMENT FUNCTIONS -END-
-
-	// TEACHER MANAGEMENT FUNCTIONS -START-
+	// ---[TEACHER MANAGEMENT FUNCTION]---
+	// 			---[START]---
 	public function teacher()
 	{
 		$this->check_session();
@@ -457,7 +425,6 @@ class Admin extends CI_Controller
 		
 		$this->check_session();
 		$search = ($this->input->post("search_teacher"))? $this->input->post("search_teacher"): '';
-
         $this->load->model('Teacher');
         $config = array();
 		$config = $this->bootstrap_pagination();
@@ -465,13 +432,11 @@ class Admin extends CI_Controller
 		$config["total_rows"] = $this->Teacher->count($search);
 		$config["per_page"] = 4;
 		$config["uri_segment"] = 3;
-
         $this->pagination->initialize($config);
         $page = ($this->uri->segment(3))? $this->uri->segment(3) : 0;
 		$data["pagination"] = $this->pagination->create_links();
 		$data['teachers'] = $this->Teacher->select($config["per_page"], $page, $search);
         $data['search'] = $search;
-
 		$data['title'] = "Admin Manage Teacher";
 		$this->load->view('dashboard/header',$data);
 		$this->load->view('admin/side_nav');
@@ -486,8 +451,6 @@ class Admin extends CI_Controller
 		$this->check_session();
 		$this->load->model('Teacher');
 		$data['teacher'] = $this->Teacher->get_teacher($id);
-
-
 		$data['title'] = "Admin Manage teacher";
 		$this->load->view('dashboard/header',$data);
 		$this->load->view('admin/side_nav');
@@ -501,8 +464,6 @@ class Admin extends CI_Controller
 	{
 		$this->load->model('Teacher');
 		$data['teacher'] = $this->Teacher->get_teacher($id);
-
-
 		$data['title'] = "Admin Manage Teacher";
 		$this->load->view('dashboard/header',$data);
 		$this->load->view('admin/side_nav');
@@ -516,11 +477,9 @@ class Admin extends CI_Controller
 	{
 		$this->check_session();
 		$this->load->model('Teacher');
-
 		$this->form_validation->set_rules('fname','First name', 'required');
 		$this->form_validation->set_rules('mname', 'Middle name', 'required');
 		$this->form_validation->set_rules('lname', 'Last name', 'required');
-
 		if(!$this->form_validation->run())
 		{
 			$this->edit_teacher($id);
@@ -532,7 +491,6 @@ class Admin extends CI_Controller
 				'mname' => $this->input->post('mname'),
 				'lname' => $this->input->post('lname'),
 			);
-
 			$this->Teacher->update($data,$id);
 			redirect('Admin/teacher');
 		}
@@ -546,9 +504,6 @@ class Admin extends CI_Controller
 		$this->form_validation->set_rules('mname', 'Middle name', 'required');
 		$this->form_validation->set_rules('lname', 'Last name', 'required');
 		$this->form_validation->set_rules('masterclass', 'Master class', 'required');
-
-
-
 		if(!$this->form_validation->run())
 		{
 			$this->teacher();
@@ -563,19 +518,14 @@ class Admin extends CI_Controller
 				'type' => 'Teacher',
 				'datecreated' => date('Y-m-d'),
 			);
-
-
 			// FILE UPLOAD --
 			$config = array(
 				'upload_path' =>  './uploads/',
 				'allowed_types' => 'gif|jpg|png',
 				'max_size' => 2048
 			);
-
-
 			$this->load->library('upload');
 			$this->upload->initialize($config);
-
 			if(!$this->upload->do_upload('avatar'))
 			{
 				$this->session->set_flashdata('error', $this->upload->display_errors());
@@ -585,21 +535,15 @@ class Admin extends CI_Controller
 			{
 				// UPLOAD SUCCESS 
 				$upload_data = $this->upload->data();
-
-
 				// GET UPLOAD FILE NAME
 				$user_data['avatar'] = $upload_data['file_name'];
-
 				$tid = $this->Teacher->insert($user_data);
-
 				$teacher_data = array(
 					'tid' => $tid,
 					'yearlvl' => $this->input->post('yearlvl'),
 					'masterclass' => $this->input->post('masterclass'),
 				);
-
 				$this->Teacher->insert_teacher($teacher_data);
-
 				redirect('Admin/teacher');
 			}
 		}
@@ -618,9 +562,11 @@ class Admin extends CI_Controller
 		$this->User->delete($id);
 		redirect('Admin/teacher');
 	}
-	// TEACHER MANAGEMENT FUNCTIONS -END-
+	// ---[TEACHER MANAGEMENT FUNCTION]---
+	// 			---[END]---
 
-	// NON-TEACHING STAFF MANAGEMENT FUNCTIONS -START-
+	// ---[STAFF MANAGEMENT FUNCTION]---
+	// 			---[START]---
 	public function staff()
 	{
 		$this->check_session();
@@ -631,15 +577,10 @@ class Admin extends CI_Controller
 		$config["total_rows"] = $this->Staff->count();
 		$config["per_page"] = 4;
 		$config["uri_segment"] = 3;
-
-
 		$this->pagination->initialize($config);
         $data['pagination'] = $this->pagination->create_links();
         $page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
-
         $data['staffs'] = $this->Staff->select($config["per_page"], $page);
-
-
 		$data['title'] = "Admin Manage Staff";
 		$this->load->view('dashboard/header',$data);
 		$this->load->view('admin/side_nav');
@@ -653,7 +594,6 @@ class Admin extends CI_Controller
 	{
 		$this->check_session();
 		$search = ($this->input->post("search_staff"))? $this->input->post("search_staff"): '';
-
         $this->load->model('Staff');
         $config = array();
 		$config = $this->bootstrap_pagination();
@@ -661,13 +601,11 @@ class Admin extends CI_Controller
 		$config["total_rows"] = $this->Staff->count($search);
 		$config["per_page"] = 4;
 		$config["uri_segment"] = 3;
-
         $this->pagination->initialize($config);
         $page = ($this->uri->segment(3))? $this->uri->segment(3) : 0;
 		$data["pagination"] = $this->pagination->create_links();
 		$data['staffs'] = $this->Staff->select($config["per_page"], $page, $search);
         $data['search'] = $search;
-
 		$data['title'] = "Admin Manage Staff";
 		$this->load->view('dashboard/header',$data);
 		$this->load->view('admin/side_nav');
@@ -707,11 +645,9 @@ class Admin extends CI_Controller
 	{
 		$this->check_session();
 		$this->load->model('Staff');
-
 		$this->form_validation->set_rules('fname','First name', 'required');
 		$this->form_validation->set_rules('mname', 'Middle name', 'required');
 		$this->form_validation->set_rules('lname', 'Last name', 'required');
-
 		if(!$this->form_validation->run())
 		{
 			$this->edit_staff($id);
@@ -723,7 +659,6 @@ class Admin extends CI_Controller
 				'mname' => $this->input->post('mname'),
 				'lname' => $this->input->post('lname'),
 			);
-
 			$this->Staff->update($data,$id);
 			redirect('Admin/staff');
 		}
@@ -738,9 +673,7 @@ class Admin extends CI_Controller
 		$this->form_validation->set_rules('fname', 'First name', 'required');
 		$this->form_validation->set_rules('mname', 'Middle name', 'required');
 		$this->form_validation->set_rules('lname', 'Last name', 'required');
-		$this->form_validation->set_rules('type', 'Staff Type', 'required');
-
-		
+		$this->form_validation->set_rules('type', 'Staff Type', 'required');	
 		if(!$this->form_validation->run())
 		{
 			$this->staff();
@@ -755,19 +688,14 @@ class Admin extends CI_Controller
 				'type' => 'Staff',
 				'datecreated' => date('Y-m-d'),
 			);
-
-
 			// FILE UPLOAD --
 			$config = array(
-				'upload_path' =>  './uploads/',
-				'allowed_types' => 'gif|jpg|png',
-				'max_size' => 2048
+				'upload_path' =>  $this->config->item('Upload_path'),
+				'allowed_types' => $this->config->item('Img_types'),
+				'max_size' => $this->config->item('Max_img_size'),
 			);
-
-
 			$this->load->library('upload');
 			$this->upload->initialize($config);
-
 			if(!$this->upload->do_upload('avatar'))
 			{
 				$this->session->set_flashdata('error', $this->upload->display_errors());
@@ -777,21 +705,14 @@ class Admin extends CI_Controller
 			{
 				// UPLOAD SUCCESS 
 				$upload_data = $this->upload->data();
-
-
-
 				// GET UPLOAD FILE NAME
 				$user_data['avatar'] = $upload_data['file_name'];
-
 				$sid = $this->Staff->insert($user_data);
-
 				$staff_data = array(
 					'sid' => $sid,
 					'type' => $this->input->post('type'),
 				);
-
 				$this->Staff->insert_staff($staff_data);
-
 				redirect('Admin/staff');
 			}
 		}
@@ -810,11 +731,11 @@ class Admin extends CI_Controller
 		$this->User->delete($id);
 		redirect('Admin/staff');
 	}
-	// NON-TEACHING STAFF MANAGEMENT FUNCTIONS -END-
+	// ---[STAFF MANAGEMENT FUNCTION]---
+	// 			---[END]---
 
-
-
-
+	// ---[BOOTSTRAP CONFIGURATION/STYLE FOR PAGINATION]---
+	// 					---[START]---
 	public function bootstrap_pagination()
 	{
 		// BOOTSTRAP 
@@ -840,14 +761,17 @@ class Admin extends CI_Controller
 		);
 		// BOOTSTRAP
 	}
-
+	// ---[BOOTSTRAP CONFIGURATION/STYLE FOR PAGINATION]---
+	// 					---[END]---
 
 	public function check_session()
 	{
+		// ---[FUNCTION DESCRIPTION & USE CASE SCENARIO]---
+		// SESSION CHECKER FOR ADMIN LOGINS; LIMITS ACCESS TO OTHER USERTYPES
+		// REDIRECTS TO LOGIN PAGE 
 		if($this->session->userdata['admin_logged_in'] == FALSE)
 		{
 			redirect('Login');
 		}
 	}
-
 }

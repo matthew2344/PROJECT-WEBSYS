@@ -35,7 +35,7 @@ $config['base_url'] = '';
 | variable so that it is blank.
 |
 */
-$config['index_page'] = 'index.php';
+$config['index_page'] = '';
 
 /*
 |--------------------------------------------------------------------------
@@ -531,6 +531,22 @@ $config['rewrite_short_tags'] = FALSE;
 */
 $config['proxy_ips'] = '';
 
-
+// EMAIL CONFIG [START]
 $config['email'] = 'emailsample2344@gmail.com';
 $config['password'] = 'juhpxuhymrclxpuh'; // This an app password. Not my actual gmail password
+// EMAIL CONFIG [END]
+
+// IMAGE PATHS [START]
+
+$config['Asset_img'] = 'assets/img/';
+$config['Upload_img'] = 'uploads/';
+$config['Upload_path'] = './uploads/';
+    
+// IMAGE PATHS [END]
+
+// UPLOAD CONFIG [START]
+
+$config['Img_types'] = 'gif|jpg|png';
+$config['Max_img_size'] = 2048;
+
+// UPLOAD CONFIG [END]

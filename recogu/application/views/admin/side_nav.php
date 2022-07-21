@@ -6,20 +6,20 @@
                <h3><i class="fa-solid fa-user"></i> <span>RecogU</span></h3>
             </div>
             <ul class="list-unstyled components">
-               <li  class="<?php if($this->uri->segment(1)=="admin_profile"){echo "active";}?>">
-                  <a href="<?=base_url('admin_profile')?>" class="dashboard"><i class="material-icons">account_circle</i><span>Profile</span></a>
+               <li  class="<?php if($this->uri->segment(1)=="Admin_profile"){echo "active";}?>">
+                  <a href="<?=base_url('Admin_profile')?>" class="dashboard"><i class="material-icons">account_circle</i><span>Profile</span></a>
                </li>
-               <li  class="<?php if($this->uri->segment(1)=="admin_dashboard"){echo "active";}?>">
-                  <a href="<?=base_url('admin_dashboard')?>" class="dashboard"><i class="material-icons">dashboard</i><span>Dashboard</span></a>
+               <li  class="<?php if($this->uri->segment(1)=="Admin_dashboard"){echo "active";}?>">
+                  <a href="<?=base_url('Admin_dashboard')?>" class="dashboard"><i class="material-icons">dashboard</i><span>Dashboard</span></a>
                </li>
-               <li  class="<?php if($this->uri->segment(1)=="admin_student"){echo "active";}?>">
-                  <a href="<?=base_url('admin_student')?>" class="dashboard"><i class="material-icons">face</i><span>Students</span></a>
+               <li  class="<?php if($this->uri->segment(1)=="Admin_student"){echo "active";}?>">
+                  <a href="<?=base_url('Admin_student')?>" class="dashboard"><i class="material-icons">face</i><span>Students</span></a>
                </li>
-               <li  class="<?php if($this->uri->segment(1)=="admin_teacher"){echo "active";}?>">
-                  <a href="<?=base_url('admin_teacher')?>" class="dashboard"><i class="material-icons">manage_accounts</i><span>Teaching Staff</span></a>
+               <li  class="<?php if($this->uri->segment(1)=="Admin_teacher"){echo "active";}?>">
+                  <a href="<?=base_url('Admin_teacher')?>" class="dashboard"><i class="material-icons">manage_accounts</i><span>Teaching Staff</span></a>
                </li>
-               <li  class="<?php if($this->uri->segment(1)=="admin_staff"){echo "active";}?>">
-                  <a href="<?=base_url('admin_staff')?>" class="dashboard"><i class="material-icons">badge</i><span>Non-Teaching Staff</span></a>
+               <li  class="<?php if($this->uri->segment(1)=="Admin_staff"){echo "active";}?>">
+                  <a href="<?=base_url('Admin_staff')?>" class="dashboard"><i class="material-icons">badge</i><span>Non-Teaching Staff</span></a>
                </li>
 
                <li class="">

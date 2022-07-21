@@ -20,10 +20,10 @@
                <div class="card-title d-flex flex-wrap justify-content-between">
                   Admin Profile
                   <br>
-                  <a href="<?= base_url('Student/profile')?>">Go back</a>
+                  <a href="<?= base_url('Student_profile')?>">Go back</a>
                </div>
                <div class="card-body">
-                  <?= form_open('Student/update_profile/'.$_SESSION['uid'], array('class' => 'form')) ?>
+                  <?= form_open('Student_update/'.$_SESSION['uid'], array('class' => 'form')) ?>
                   <div class="row mb-5">
                      <div class="col-xl-3 col-lg-4 col-md-5 col-sm-3">
                         <label for="firstname">First name</label>
@@ -50,7 +50,7 @@
                   <br>
                </div>
                <div class="card-body">
-                  <?= form_open('Student/update_password/'.$_SESSION['uid'], array('class' => 'form')) ?>
+                  <?= form_open('Student_password/'.$_SESSION['uid'], array('class' => 'form')) ?>
                   <div class="row mb-5">
                      <div class="col-xl-3 col-lg-4 col-md-5 col-sm-3">
                         <label for="Old password">Old Password</label>

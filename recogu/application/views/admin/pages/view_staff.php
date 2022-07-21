@@ -10,14 +10,14 @@
                <div class="card-title d-flex flex-wrap justify-content-between">
                   User Profile
                   <br>
-                  <a href="<?= base_url('Admin/staff')?>">Go back</a>
+                  <a href="<?= base_url('Admin_staff')?>">Go back</a>
                </div>
                <div class="card-body">
                   <div class="row">
                      <?php foreach($staff as $i):?>
                      <div class="col-xl-3 col-lg-4 col-md-12">
                         <div class="img" style="width: 100%;">
-                           <img src="<?=base_url()?>uploads/<?=$i->avatar?> " alt="" height="200" style="width: inherit; object-fit: contain; display: block;">
+                           <img src="<?=base_url($this->config->item('Upload_img'))?><?=$i->avatar?> " alt="" height="200" style="width: inherit; object-fit: contain; display: block;">
                         </div>
                      </div>
                      <div class="col-xl-9 col-lg-8 col-md-12">
@@ -26,6 +26,9 @@
                         </h5>
                         <h5>
                            Full name: <?= $i->fname?> <?= $i->mname;?> <?= $i->lname?>
+                        </h5>
+                        <h5>
+                           School Email: <?= $i->email?>
                         </h5>
                         <h5>
                            Staff-type: <?= $i->type?>

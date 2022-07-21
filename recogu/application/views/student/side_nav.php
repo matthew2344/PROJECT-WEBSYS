@@ -6,11 +6,11 @@
       <h3><i class="fa-solid fa-user"></i> <span>RecogU</span></h3>
    </div>
    <ul class="list-unstyled components">
-      <li  class="<?php if($this->uri->segment(2)=="profile"){echo "active";}?>">
-         <a href="<?=base_url('Student/profile')?>" class="dashboard"><i class="material-icons">account_circle</i><span>Profile</span></a>
+      <li  class="<?php if($this->uri->segment(1)=="Student_profile"){echo "active";}?>">
+         <a href="<?=base_url('Student_profile')?>" class="dashboard"><i class="material-icons">account_circle</i><span>Profile</span></a>
       </li>
-      <li  class="<?php if($this->uri->segment(2)==""){echo "active";}?>">
-         <a href="<?=base_url('Student')?>" class="dashboard"><i class="material-icons">dashboard</i><span>Dashboard</span></a>
+      <li  class="<?php if($this->uri->segment(1)=="Student_dashboard"){echo "active";}?>">
+         <a href="<?=base_url('Student_dashboard')?>" class="dashboard"><i class="material-icons">dashboard</i><span>Dashboard</span></a>
       </li>
 
       <li class="">

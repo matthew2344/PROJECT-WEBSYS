@@ -21,13 +21,13 @@
                   </a>
                   <ul class="dropdown-menu ">
                      <li>
-                        <a href="<?=base_url('Teacher/profile')?>" class="list-group-item">Profile</a>
+                        <a href="<?=base_url('Teacher_profile')?>" class="list-group-item">Profile</a>
                      </li>
                      <li>
-                        <a href="<?=base_url('Teacher/edit_profile')?>" class="list-group-item">Settings</a>
+                        <a href="<?=base_url('Teacher_edit')?>" class="list-group-item">Settings</a>
                      </li>
                      <li>
-                        <a href="<?=base_url('Teacher')?>" class="list-group-item">Dashboard</a>
+                        <a href="<?=base_url('Teacher_dashboard')?>" class="list-group-item">Dashboard</a>
                      </li>
                      <li>
                         <a href="<?=base_url('Logout')?>" class="list-group-item">Logout</a>

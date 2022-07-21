@@ -1,6 +1,6 @@
   <style>
     .footer .footer-top {
-      background: white url('<?=base_url()?>assets/img/footer-bg.png') no-repeat right top;
+      background: white url('<?=base_url($this->config->item('Asset_img'))?>footer-bg.png') no-repeat right top;
       background-size: contain;
       border-top: 1px solid #e1ecff;
       border-bottom: 1px solid #e1ecff;
