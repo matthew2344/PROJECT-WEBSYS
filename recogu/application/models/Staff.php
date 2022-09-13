@@ -11,7 +11,7 @@ class Staff extends CI_Model
     public function count($search = "")
     {
         $this->db->from('user');
-        $this->db->join('staff','staff.sid = user.id', 'inner');
+        $this->db->join('staff','staff.userID = user.id', 'inner');
 
         if($search != '')
         {
@@ -26,7 +26,7 @@ class Staff extends CI_Model
     public function select($limit, $start, $search="")
     {
         $this->db->from('user');
-        $this->db->join('staff','staff.sid = user.id', 'inner');
+        $this->db->join('staff','staff.userID = user.id', 'inner');
 
         if($search != '')
         {
@@ -57,7 +57,7 @@ class Staff extends CI_Model
     public function get_staff($id)
     {
         $this->db->from('user');
-        $this->db->join('staff', 'staff.sid = user.id');
+        $this->db->join('staff', 'staff.userID = user.id');
         $this->db->where('user.id',$id);
         $query = $this->db->get();
         return $query->result();

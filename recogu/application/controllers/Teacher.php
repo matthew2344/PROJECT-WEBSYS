@@ -151,8 +151,59 @@ class Teacher extends CI_Controller
             redirect('Teacher/profile');
         }
     }
+
+    public function my_class()
+    {
+        $this->check_session();
+        
+        $data['title'] = 'My Class';
+        $this->load->model('Attendance');
+        $config = array();
+		$config = $this->bootstrap_pagination();
+		$config["base_url"] =  base_url() . "Teacher/my_class";
+		$config["total_rows"] = $this->Attendance->count();
+		$config["per_page"] = 10;
+		$config["uri_segment"] = 4;
+		$this->pagination->initialize($config);
+        $page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+        $data['pagination'] = $this->pagination->create_links();
+        $data['face_data'] = $this->file->get_data($config["per_page"], $page);
+
+        $this->load->view('dashboard/header',$data);
+		$this->load->view('teacher/side_nav');
+		$this->load->view('teacher/nav');
+		$this->load->view('teacher/pages/my_class');
+		$this->load->view('dashboard/footer_nav');
+		$this->load->view('dashboard/footer');
+    }
     // ---[TEACHER DASHBOARD AND PROFILE]---
 	// 			---[END]---
+
+    public function bootstrap_pagination()
+	{
+		// BOOTSTRAP 
+		return array(
+			'full_tag_open' => '<ul class="pagination">',        
+			'full_tag_close' => '</ul>',        
+			'first_link' => 'First',    
+			'last_link' => 'Last',        
+			'first_tag_open' => '<li class="page-item"><span class="page-link">',        
+			'first_tag_close' => '</span></li>',        
+			'prev_link' => '&laquo',        
+			'prev_tag_open' => '<li class="page-item"><span class="page-link">',        
+			'prev_tag_close' => '</span></li>',        
+			'next_link' => '&raquo',        
+			'next_tag_open' => '<li class="page-item"><span class="page-link">',        
+			'next_tag_close' => '</span></li>',        
+			'last_tag_open' => '<li class="page-item"><span class="page-link">',        
+			'last_tag_close' => '</span></li>',        
+			'cur_tag_open' => '<li class="page-item active"><a class="page-link" href="#">',        
+			'cur_tag_close' => '</a></li>',       
+			'num_tag_open' => '<li class="page-item"><span class="page-link">',        
+			'num_tag_close' => '</span></li>',
+		);
+		// BOOTSTRAP
+	}
 
     public function check_session()
     {

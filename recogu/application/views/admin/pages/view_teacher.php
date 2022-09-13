@@ -22,7 +22,7 @@
                      </div>
                      <div class="col-xl-9 col-lg-8 col-md-12">
                         <h5>
-                           School ID: <?= $i->tid?>
+                           School ID: <?= $i->userID?>
                         </h5>
                         <h5>
                            Full name: <?= $i->fname?> <?= $i->mname;?> <?= $i->lname?>

@@ -546,7 +546,7 @@ $config['Upload_path'] = './uploads/';
 
 // UPLOAD CONFIG [START]
 
-$config['Img_types'] = 'gif|jpg|png';
+$config['Img_types'] = 'gif|jpeg|jpg|png|JPG|JPEG|PNG';
 $config['Max_img_size'] = 2048;
 
 // UPLOAD CONFIG [END]

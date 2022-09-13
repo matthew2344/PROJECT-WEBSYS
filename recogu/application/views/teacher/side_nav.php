@@ -18,6 +18,9 @@
       <li class="">
          <a href="#"><i class="material-icons">date_range</i><span>My Attendance</span></a>
       </li>
+      <li class="">
+         <a href="<?=base_url('Teacher/my_class')?>"><i class="material-icons">date_range</i><span>Class Attendance</span></a>
+      </li>
       <li  class="">
          <a href="#"><i class="material-icons">library_books</i><span>Calender</span></a>
       </li>

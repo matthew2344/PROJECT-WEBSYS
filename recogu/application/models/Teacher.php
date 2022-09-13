@@ -11,7 +11,7 @@ class Teacher extends CI_Model
     public function count($search = "")
     {
         $this->db->from('user');
-        $this->db->join('teacher','teacher.tid = user.id', 'inner');
+        $this->db->join('teacher','teacher.userID = user.id', 'inner');
 
         if($search != '')
         {
@@ -26,7 +26,7 @@ class Teacher extends CI_Model
     public function select($limit, $start, $search="")
     {
         $this->db->from('user');
-        $this->db->join('teacher','teacher.tid = user.id', 'inner');
+        $this->db->join('teacher','teacher.userID = user.id', 'inner');
 
         if($search != '')
         {
@@ -57,8 +57,16 @@ class Teacher extends CI_Model
     public function get_teacher($id)
     {
         $this->db->from('user');
-        $this->db->join('teacher', 'teacher.tid = user.id');
+        $this->db->join('teacher', 'teacher.userID = user.id');
         $this->db->where('user.id',$id);
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+    public function get_all()
+    {
+        $this->db->from('user');
+        $this->db->where('type', 'Teacher');
         $query = $this->db->get();
         return $query->result();
     }

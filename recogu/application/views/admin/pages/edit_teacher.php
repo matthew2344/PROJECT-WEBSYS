@@ -24,7 +24,7 @@
                </div>
                <div class="card-body">
                 <?php foreach($teacher as $i):?>
-                  <?= form_open('Update_teacher/'.$i->tid, array('class' => 'form')) ?>
+                  <?= form_open('Update_teacher/'.$i->userID, array('class' => 'form')) ?>
                   <div class="row mb-5">
                      <div class="col-xl-3 col-lg-4 col-md-5 col-sm-3">
                         <label for="Firstname">First Name</label>

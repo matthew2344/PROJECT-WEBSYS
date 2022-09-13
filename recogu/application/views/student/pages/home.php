@@ -3,12 +3,12 @@
    <div class="col-lg-12 col-md-12 col-sm-12">
       <div class="card card-stats">
          <div class="card-header">
-            <div class="icon icon-warning">
-               <h1>Welcome back!</h1>
+            <div class="icon">
+               <h1 class="fw-bold">Welcome back!</h1>
             </div>
          </div>
          <div class="card-content">
-            <h4 class="text-primary text-center">STUDENT: <?=$_SESSION['fname']?> <?=$_SESSION['mname']?> <?=$_SESSION['lname']?></h4>
+            <h4 class="text-primary fw-bold text-center"><?=$_SESSION['fname']?> <?=$_SESSION['mname']?> <?=$_SESSION['lname']?></h4>
          </div>
          <div class="card-footer">
             <div class="stats">

@@ -41,6 +41,14 @@ class User extends CI_Model
         return $result->result();
     }
 
+    public function get()
+    {
+        $this->db->from('user');
+        $this->db->where('type !=', 'Admin');
+        $query = $this->db->get();
+        return $query->result();
+    }
+
     public function login($data)
     {
         $result = $this->db->get_where('user', array('email' => $data['email'], 'password' => $data['password']));
@@ -74,6 +82,7 @@ class User extends CI_Model
     {
         $this->db->delete('user', array('id' => $uid));
     }
+
     
 
 }

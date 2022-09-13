@@ -14,10 +14,6 @@
                     </p>
                 </div>
 
-                <div class="col">
-
-                </div>
-
                 <div class="col-lg-5 col-xl-4 mb-5 mb-lg-0">
                     <div class="card">
                         <div class="card-body py-5 px-md-5">

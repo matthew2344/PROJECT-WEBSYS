@@ -30,6 +30,7 @@
                      </div>
                      <div class="col-xl-9 col-lg-8 col-md-12">
                         <h5>UID: <?=$_SESSION['uid']?></h5>
+                        <h5>EMAIL: <?=$_SESSION['email']?></h5>
                         <h5>Full name: <?=$_SESSION['fname'].' '.$_SESSION['mname'].' '.$_SESSION['lname'];?></h5>
                         <h5>User Type: <?=$_SESSION['type']?></h5>
                         <h5>Password: ******</h5>
