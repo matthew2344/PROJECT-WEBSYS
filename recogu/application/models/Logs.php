@@ -53,5 +53,66 @@ class Logs extends CI_Model
         return $query->result();
     }
 
+    public function emp_count($type, $search = "")
+    {
+        $this->db->from('user');
+
+
+        $this->db->where('type', $type);
+        
+        if($search != '')
+        {
+            $this->db->group_start();
+            $this->db->like('fname', $search);
+            $this->db->or_like('mname', $search);
+            $this->db->or_like('lname', $search);
+            $this->db->group_end();
+        }
+
+
+        return $this->db->count_all_results();
+    }
+
+    public function emp_get($limit, $start,$type,$search = "")
+    {
+        $this->db->from('user');
+
+
+        $this->db->where('type', $type);
+
+        if($search != '')
+        {
+            $this->db->group_start();
+            $this->db->like('fname', $search);
+            $this->db->or_like('mname', $search);
+            $this->db->or_like('lname', $search);
+            $this->db->group_end();
+        }
+
+        $this->db->limit($limit, $start);
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+    public function student_count()
+    {
+        $this->db->from('user');
+        $this->db->join('gate_logs', 'gate_logs.userID = user.id', 'inner');
+
+
+        return $this->db->count_all_results();
+    }
+    
+    public function student_get($limit, $start)
+    {
+        $this->db->from('user');
+        $this->db->join('gate_logs', 'gate_logs.userID = user.id', 'inner');
+
+
+        $this->db->limit($limit, $start);
+        $query = $this->db->get();
+        return $query->result();
+    }
+
 
 }

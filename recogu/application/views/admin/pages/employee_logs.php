@@ -7,20 +7,20 @@
             </div>
 
             <div class="card-body">
-                <?=form_open('Admin/s_logs_go'); ?>
+                <?=form_open('Admin/e_logs_go'); ?>
                 <div class="row mb-4">
 
                     <div class="col-lg-3 col-md-3 col-sm-4">
                         <label for="">Employee Type</label>
-                        <select name="year_level" id="year_level" class="form-select <?php if(form_error('year_level')) echo 'is-invalid';?>">
+                        <select name="type" id="type" class="form-select <?php if(form_error('type')) echo 'is-invalid';?>">
                             <option value=""></option>
                             <?php foreach($type as $i):?>
-                                <option value=""></option>
+                                <option value="<?=$i?>"><?=$i?></option>
                             <?php endforeach;?>
                         </select>
                         <div class="invalid-feedback">
                             <?php 
-                                echo form_error('year_level');
+                                echo form_error('type');
                             ?>
                         </div>
                     </div>
@@ -47,8 +47,8 @@
 
                 <div class="row mb-4">
                     <div class="col-lg-4 col-sm-6 d-flex">
-                    <?= form_open('Admin/s_logs_search/'.$this->uri->segment(3), array('class' => 'd-flex'))?>
-                    <input class="form-control me-2" type="search" name="search_student" placeholder="Search" aria-label="Search" value="<?php if(isset($search)){ echo $search;}?>">
+                    <?= form_open('Admin/e_logs_search/'.$this->uri->segment(3), array('class' => 'd-flex'))?>
+                    <input class="form-control me-2" type="search" name="search_employee" placeholder="Search" aria-label="Search" value="<?php if(isset($search)){ echo $search;}?>">
                     <button class="btn btn-primary" type="submit" >Search</button>
                     <?= form_close();?>
                     </div>

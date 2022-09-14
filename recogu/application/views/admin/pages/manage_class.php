@@ -48,15 +48,15 @@
                                 ?>
                             </div>
                         </div>
-                        <div class="col-lg-3 col-md-3 col-sm-4">
+                        <!-- <div class="col-lg-3 col-md-3 col-sm-4">
                             <label for="">Class Adviser</label>
                             <select name="adviser" id="" class="form-select mt-2">
                                 <option value=""></option>
-                                <?php foreach($teachers as $i): ?>
-                                    <option value="<?=$i->id?>"><?=$i->fname?> <?=$i->lname?></option>
-                                <?php endforeach; ?>
+                                < ?php //foreach($teachers as $i): ?>
+                                    <option value="< ?=$i->id?>">< ?=$i->fname?> < ?=$i->lname?></option>
+                                < ?php endforeach; ?>
                             </select>
-                        </div>
+                        </div> -->
                     </div>
                     <input type="submit" value="Save" class="btn btn-primary">
                 <?=form_close();?>

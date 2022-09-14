@@ -1123,6 +1123,38 @@ class Admin extends CI_Controller
 		$this->load->view('dashboard/footer');
 	}
 
+	public function view_student_log($id)
+	{
+		$this->check_session();
+		if($id == '')
+		{
+			$this->student_logs();
+		}
+		else
+		{
+			$this->load->model('Logs');
+			$this->load->model('Student');
+			$data['user'] = $this->Student->get_student($id);
+			$config = array();
+			$config = $this->bootstrap_pagination();
+			$config["base_url"] =  base_url() . "Admin/view_student_log/$id";
+			$config["total_rows"] = $this->Logs->student_count();
+			$config["per_page"] = 4;
+			$config["uri_segment"] = 4;
+			$this->pagination->initialize($config);
+			$page = ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;
+			$data['pagination'] = $this->pagination->create_links();
+			$data['logs'] = $this->Logs->student_get($config["per_page"], $page);
+			$data['title'] = "Manage Logs";
+			$this->load->view('dashboard/header',$data);
+			$this->load->view('admin/side_nav');
+			$this->load->view('admin/nav');
+			$this->load->view('admin/pages/view_student_log');
+			$this->load->view('dashboard/footer_nav');
+			$this->load->view('dashboard/footer');
+		}
+	}
+
 	public function s_logs_go()
 	{
 		$this->check_session();
@@ -1197,22 +1229,23 @@ class Admin extends CI_Controller
 		$this->load->model('Classroom');
 		$data['class'] = $this->Classroom->select();
 		$this->load->model('Logs');
-		$id = ($this->uri->segment(3)) ? $this->uri->segment(3) : '';
+		$type = ($this->uri->segment(3)) ? $this->uri->segment(3) : '';
 
-		if($id != '')
+		if($type != '')
 		{
 			$config = array();
 			$config = $this->bootstrap_pagination();
-			$config["base_url"] =  base_url() . "Admin/student_logs/$id";
-			$config["total_rows"] = $this->Logs->inner_count($id);
+			$config["base_url"] =  base_url() . "Admin/employee_logs/$type";
+			$config["total_rows"] = $this->Logs->emp_count($type);
 			$config["per_page"] = 4;
 			$config["uri_segment"] = 4;
 			$this->pagination->initialize($config);
 			$page = ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;
 			$data['pagination'] = $this->pagination->create_links();
-			$data['logs'] = $this->Logs->inner_get($config["per_page"], $page, $id);
+			$data['logs'] = $this->Logs->emp_get($config["per_page"], $page, $type);
 		}
 
+		$data['type'] = array('Teacher', 'Janitor', 'Cook', 'Security');
 		
 		$data['title'] = "Manage Logs";
 		$this->load->view('dashboard/header',$data);
@@ -1221,6 +1254,61 @@ class Admin extends CI_Controller
 		$this->load->view('admin/pages/employee_logs');
 		$this->load->view('dashboard/footer_nav');
 		$this->load->view('dashboard/footer');
+	}
+
+	public function e_logs_search()
+	{
+		$this->check_session();
+		$this->load->model('Classroom');
+		$data['class'] = $this->Classroom->select();
+		$this->load->model('Logs');
+
+		$search = ($this->input->post("search_employee"))? $this->input->post("search_employee"): '';
+		$search = ($this->uri->segment(4)) ? $this->uri->segment(4) : $search;
+		$type = ($this->uri->segment(3)) ? $this->uri->segment(3) : '';
+
+		if($type != '')
+		{
+			$this->employee_logs();
+		}
+		else 
+		{
+			$config = array();
+			$config = $this->bootstrap_pagination();
+			$config["base_url"] =  base_url() . "Admin/e_logs_search/$type/$search";
+			$config["total_rows"] = $this->Logs->emp_count($type, $search);
+			$config["per_page"] = 4;
+			$config["uri_segment"] = 5;
+			$this->pagination->initialize($config);
+			$page = ($this->uri->segment(5)) ? $this->uri->segment(5) : 0;
+			$data['pagination'] = $this->pagination->create_links();
+			$data['logs'] = $this->Logs->emp_get($config["per_page"], $page, $type, $search);
+			$data['search'] = $search;
+			$data['tests'] = $type;
+			$data['type'] = array('Teacher', 'Janitor', 'Cook', 'Security');
+
+			$data['title'] = "Manage Logs";
+			$this->load->view('dashboard/header',$data);
+			$this->load->view('admin/side_nav');
+			$this->load->view('admin/nav');
+			$this->load->view('admin/pages/employee_logs');
+			$this->load->view('dashboard/footer_nav');
+			$this->load->view('dashboard/footer');
+		}
+	}
+
+	public function e_logs_go()
+	{
+		$this->check_session();
+		$this->form_validation->set_rules('type','Type', 'required');
+		if(!$this->form_validation->run())
+		{
+			$this->employee_logs();
+		}
+		else
+		{
+			redirect('Admin/employee_logs/'.$this->input->post('type'));
+		}
 	}
 
 	public function go_back()

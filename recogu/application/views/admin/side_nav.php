@@ -32,9 +32,9 @@
                <li  class="">
                   <a href="<?=base_url('Admin/gate_logs')?>"><i class="material-icons">library_books</i><span>Gate Logs</span></a>
                </li>
-               <li  class="">
-                  <a href="<?=base_url('Admin/test')?>"><i class="material-icons">photo_camera</i><span>Gate Camera</span></a>
-               </li>
+               <!-- <li  class="">
+                  <a href="< ?=base_url('Admin/test')?>"><i class="material-icons">photo_camera</i><span>Gate Camera</span></a>
+               </li> -->
                <li  class="">
                   <a href="<?=base_url('Logout')?>"><i class="material-icons">logout</i><span>Logout</span></a>
                </li>

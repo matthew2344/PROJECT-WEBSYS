@@ -11,7 +11,7 @@
                         <a href="<?=base_url('Admin/student_logs')?>">Student Gate logs</a>
                     </div>
                     <div class="col-lg-3 col-md-4 col-sm-4 col-12 mb-3">
-                        <a href="">Employee Gate logs</a>
+                        <a href="<?=base_url('Admin/employee_logs')?>">Employee Gate logs</a>
                     </div>
                 </div>
                 <div class="row mb-4">
@@ -34,6 +34,11 @@
                             </tr>
                         </thead>
                         <tbody>
+                            <?php if(!$attendance):?>
+                                <tr>
+                                    <td colspan="5" class="text-center text-primary">NO DATA</td>
+                                </tr>
+                            <?php endif;?>
                             <?php foreach($attendance as $i):?>
                             <tr>
                                 <td><?=$i->fname?> <?=$i->lname?></td>

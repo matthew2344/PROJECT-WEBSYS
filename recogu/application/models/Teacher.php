@@ -58,6 +58,7 @@ class Teacher extends CI_Model
     {
         $this->db->from('user');
         $this->db->join('teacher', 'teacher.userID = user.id');
+        $this->db->join('class', 'class.classID = teacher.masterclass');
         $this->db->where('user.id',$id);
         $query = $this->db->get();
         return $query->result();

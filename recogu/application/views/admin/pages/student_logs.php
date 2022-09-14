@@ -89,7 +89,7 @@
                                 <td><?=$i->mname?></td>
                                 <td><?=$i->lname?></td>
                                 <td><?=$i->name?></td>
-                                <td><a href="" class="btn"><i class="material-icons">search</i></a></td>
+                                <td><a href="<?=base_url("Admin/view_student_log/$i->id")?>" class="btn"><i class="material-icons">search</i></a></td>
                             </tr>
                             <?php 
                             endforeach;?>

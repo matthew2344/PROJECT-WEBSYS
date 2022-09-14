@@ -31,10 +31,7 @@
                            School Email: <?= $i->email?>
                         </h5>
                         <h5>
-                           Year-level: <?= $i->yearlvl?>
-                        </h5>
-                        <h5>
-                           Section Masterclass: <?= $i->masterclass?>
+                           Section Masterclass: <?= $i->name?>
                         </h5>
                      </div>
                      <?php endforeach; ?>
